@@ -8,9 +8,7 @@ int main()
 {
 	cout << "Hello World!" << endl;
 	
-	server* srv = new server();
-	
-	delete srv;
+	server srv;
 	
 	return 0;
 }
