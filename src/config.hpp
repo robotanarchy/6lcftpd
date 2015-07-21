@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <vector>
+#include <map>
 
 using namespace std;
 
@@ -7,21 +9,10 @@ using namespace std;
 class config
 {	
 	public:
-		config();
-		string	get_issue();
-		string	get_share();
-		string	get_chown();
-		int		get_chmod();
-		string	get_ipadr();
-		bool	get_write();
+		config(vector<string> keys);
 	
 	private:
-		string	issue;
-		string	share;
-		string	chown;
-		int		chmod;
-		string	ipadr;
-		bool	write;
+		map<string,string> options;
 };
 
 

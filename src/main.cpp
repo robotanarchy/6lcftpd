@@ -12,12 +12,13 @@ int main()
 	
 	try
 	{
-		config cfg;
+		config cfg {{"issue", "share", "chown", "chmod", "ipadr",
+			"write"}};
 		server srv;
 	}
 	catch(exception &ex)
 	{
-		cout << "WHOOPS: " << ex.what() << endl << endl;
+		cout << "PRO-TIP: " << ex.what() << endl << endl;
 		cout << "Shutting down with error." << endl;
 		return 1;
 	}
