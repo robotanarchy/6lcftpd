@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-	cout << "Six Lines of Config FTP Daemon" << endl
+	cout << "six lines of config ftp daemon" << endl
 	     << "------------------------------" << endl;
 	
 	try

@@ -1,21 +1,21 @@
 #include "server.hpp"
 #include <iostream>
-#include <asio.hpp>
 #include <list>
 #include <string>
 
 using namespace std;
-using namespace asio::ip;
 
 server::server(config* cfg)
 {
 	this->cfg = cfg;
+	tcp::endpoint end;
 	
 	// parse the IP
 	try
 	{
 		address addr = addr.from_string(cfg->get_opt("ipadr"));
-		cout << "Listening on: " << addr << endl;
+		cout << "listening on: " << addr << endl;
+		end.address(addr);
 	}
 	catch(exception &e)
 	{
@@ -24,16 +24,15 @@ server::server(config* cfg)
 	}
 	
 	
-	
 	// bind the control port
-	tcp::endpoint ctrl;
 	list<int> ports = {21, 2111, 2221, 2121, 21111, 22221};
 	for(auto port: ports)
 	{
-		cout << "trying to host on port " << port << ":" << endl;
-		
+		cout << "trying to host on port " << port << ": (stub)" << endl;
+		end.port(port);
 	}
 	
 	
 	cout << "server stub done." << endl;
+	this->end = end;
 }
