@@ -13,7 +13,7 @@ class config
 		string get_opt(string key);
 	
 	private:
-		map<string,string> options;
+		map<string,string> opt;
 };
 
 

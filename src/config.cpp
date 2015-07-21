@@ -19,7 +19,6 @@ config::config(vector<string> keys)
 	
 	// read it line by line
 	string line;
-	map<string,string> opt;
 	while(getline(file, line))
 		for(size_t i=0;i<keys.size();i++)
 		{
@@ -40,13 +39,12 @@ config::config(vector<string> keys)
 		if(opt.find(keys[i]) == opt.end())
 			throw runtime_error("Your config is missing the '"+keys[i]
 				+"' option!");
-	this->options = opt;
 }
 
 string config::get_opt(string key)
 {
-	auto value = this->options.find(key);
-	if(value == this->options.end())
+	auto value = opt.find(key);
+	if(value == opt.end())
 		throw runtime_error("I've tried to read an invalid config"
 			" option: '"+key+"' (this is a bug!)");
 	return value->second;

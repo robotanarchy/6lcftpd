@@ -14,9 +14,12 @@ server::server(config* cfg)
 	for(auto port: ports)
 	{
 		cout << "trying to host on port " << port << "...";
+		cout << "STUB!" << endl;
+		
+		/*
 		try
 		{
-			/*this->sock_control_listen = */net.socket_open(port);
+			net.socket_open(port);
 			cout << "OK!" << endl;
 			break;
 		}
@@ -24,6 +27,7 @@ server::server(config* cfg)
 		{
 			cout << "NEXT! (" << e.what() << ")" << endl;
 		}
+		*/
 	}
 	
 	cout << "server stub done." << endl;
