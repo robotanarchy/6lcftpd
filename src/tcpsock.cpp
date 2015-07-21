@@ -2,30 +2,30 @@
 #include <iostream>
 
 
-tcpsock::tcpsock(uint16_t port, SDLNet_SocketSet socks_sdl2)
+tcpsock::tcpsock(uint16_t port, SDLNet_SocketSet sockset_sdl)
 {
 	// open the socket
 	// NOTE: SDL_Net can only host on all interfaces at once!
 	IPaddress ip;
 	SDLNet_ResolveHost(&ip, NULL, port);
 	
-	this->sock_sdl2 = SDLNet_TCP_Open(&ip);
-	if(!this->sock_sdl2)
+	m_sock_sdl = SDLNet_TCP_Open(&ip);
+	if(!m_sock_sdl)
 		throw runtime_error(string("SDL: ") + SDLNet_GetError());
-	SDLNet_TCP_AddSocket(socks_sdl2, this->sock_sdl2);
+	SDLNet_TCP_AddSocket(sockset_sdl, m_sock_sdl);
 }
 
 tcpsock::~tcpsock()
 {
 	// FIXME: Somehow this gets called to often and results in a
 	// segfault. When commented out, we have a memory leak of course.
-	// if(this->sock_sdl2)
-	//	SDLNet_TCP_Close(this->sock_sdl2);
+	// if(m_sock_sdl)
+	//	SDLNet_TCP_Close(m_sock_sdl);
 }
 
 bool tcpsock::ready()
 {
-	return SDLNet_SocketReady(this->sock_sdl2);
+	return SDLNet_SocketReady(m_sock_sdl);
 }
 
 string recv(uint16_t len)

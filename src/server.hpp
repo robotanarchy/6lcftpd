@@ -6,9 +6,9 @@
 class server
 {
 	public:
-		server(config* cfg, tcp* net);
+		server(config* cfg, tcp* tcp_arg);
 	
 	private:
-		config* cfg;
-		tcp* net;
+		config* m_cfg;
+		tcp* m_tcp;
 };

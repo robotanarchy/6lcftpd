@@ -15,7 +15,7 @@ int main()
 		config cfg {{"issue", "share", "chown", "chmod", "socks",
 			"write"}};
 		
-		tcp net(static_cast<uint16_t>(stoul(cfg.get_opt("socks"))));
+		tcp net {static_cast<uint16_t>(stoul(cfg.get_opt("socks")))};
 		
 		server srv(&cfg, &net);
 	}

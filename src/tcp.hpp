@@ -16,7 +16,7 @@ class tcpsock
 	public:
 		// wrapper for SDLNet_ResolveHost() and SDLNet_TCP_Open(),
 		// throws SDLNet_GetError() as exception
-		tcpsock(uint16_t port, SDLNet_SocketSet socks_sdl2);
+		tcpsock(uint16_t port, SDLNet_SocketSet sock_set_sdl);
 		
 		// wrapper for SDLNet_TCP_Close()
 		~tcpsock();
@@ -28,7 +28,7 @@ class tcpsock
 		string recv(uint16_t len);
 		
 	private:
-		TCPsocket sock_sdl2;
+		TCPsocket m_sock_sdl;
 };
 
 class tcp
@@ -43,7 +43,7 @@ class tcp
 		~tcp();
 		
 	private:
-		uint16_t socks_max;
-		SDLNet_SocketSet socks_sdl2;
-		vector<tcpsock*> socks;
+		uint16_t m_socks_max;
+		SDLNet_SocketSet m_sockset_sdl;
+		vector<tcpsock*> m_socks;
 };

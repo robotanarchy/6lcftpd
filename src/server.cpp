@@ -5,22 +5,20 @@
 
 using namespace std;
 
-server::server(config* cfg, tcp* net)
+server::server(config* cfg, tcp* tcp_arg)
 {
-	this->cfg = cfg;
-	this->net = net;
+	m_cfg = cfg;
+	m_tcp = tcp_arg;
 	
 	// bind the control port
 	list<uint16_t> ports = {21, 2111, 2221, 2121, 21111, 22221};
 	for(auto port: ports)
 	{
 		cout << "trying to host on port " << port << "...";
-		// cout << "STUB!" << endl;
-		
 		
 		try
 		{
-			net->socket_open(port);
+			m_tcp->socket_open(port);
 			cout << "OK!" << endl;
 			break;
 		}
