@@ -1,9 +1,12 @@
 #pragma once
 #include "config.hpp"
-#include <asio.hpp>
+#include "tcp.hpp"
 
 
-using namespace asio::ip;
+// FIXME: is there a better way than putting this in a define?
+#define MAX_SOCKETS 100
+
+
 
 class server
 {
@@ -12,5 +15,5 @@ class server
 	
 	private:
 		config* cfg;
-		tcp::endpoint end;
+		tcp net{MAX_SOCKETS};
 };

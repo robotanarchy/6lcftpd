@@ -12,14 +12,18 @@ int main()
 	
 	try
 	{
+		// TODO: ipadr gets ignored, because SDL_net can't do that.
+		// So we'll need to find another config option instead. Maybe
+		// the number of sockets?
+		
 		config cfg {{"issue", "share", "chown", "chmod", "ipadr",
 			"write"}};
 		
 		server srv(&cfg);
 	}
-	catch(exception &ex)
+	catch(exception &e)
 	{
-		cout << "PRO-TIP: " << ex.what() << endl << endl;
+		cout << "PRO-TIP: " << e.what() << endl << endl;
 		cout << "shutting down with error." << endl;
 		return 1;
 	}
