@@ -27,9 +27,7 @@ server::server(config* cfg, tcp* net)
 		catch(exception &e)
 		{
 			cout << "NEXT! (" << e.what() << ")" << endl;
-			break; // debug
 		}
-		
 	}
 	
 	cout << "server stub done." << endl;

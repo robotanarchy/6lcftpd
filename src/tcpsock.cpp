@@ -17,9 +17,10 @@ tcpsock::tcpsock(uint16_t port, SDLNet_SocketSet socks_sdl2)
 
 tcpsock::~tcpsock()
 {
-	cout << "destroying socket: " << this->sock_sdl2 << endl;
-	if(this->sock_sdl2)
-		SDLNet_TCP_Close(this->sock_sdl2);
+	// FIXME: Somehow this gets called to often and results in a
+	// segfault. When commented out, we have a memory leak of course.
+	// if(this->sock_sdl2)
+	//	SDLNet_TCP_Close(this->sock_sdl2);
 }
 
 bool tcpsock::ready()
