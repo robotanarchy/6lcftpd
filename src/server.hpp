@@ -3,17 +3,12 @@
 #include "tcp.hpp"
 
 
-// FIXME: is there a better way than putting this in a define?
-#define MAX_SOCKETS 100
-
-
-
 class server
 {
 	public:
-		server(config* cfg);
+		server(config* cfg, tcp* net);
 	
 	private:
 		config* cfg;
-		tcp net{MAX_SOCKETS};
+		tcp* net;
 };

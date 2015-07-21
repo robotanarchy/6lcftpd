@@ -12,14 +12,12 @@ int main()
 	
 	try
 	{
-		// TODO: ipadr gets ignored, because SDL_net can't do that.
-		// So we'll need to find another config option instead. Maybe
-		// the number of sockets?
-		
-		config cfg {{"issue", "share", "chown", "chmod", "ipadr",
+		config cfg {{"issue", "share", "chown", "chmod", "socks",
 			"write"}};
 		
-		server srv(&cfg);
+		tcp net(static_cast<uint16_t>(stoul(cfg.get_opt("socks"))));
+		
+		server srv(&cfg, &net);
 	}
 	catch(exception &e)
 	{
