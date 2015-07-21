@@ -20,11 +20,11 @@ int main()
 	catch(exception &ex)
 	{
 		cout << "PRO-TIP: " << ex.what() << endl << endl;
-		cout << "Shutting down with error." << endl;
+		cout << "shutting down with error." << endl;
 		return 1;
 	}
 	
 	
-	cout << "Shutting down normally." << endl;
+	cout << "shutting down normally." << endl;
 	return 0;
 }
