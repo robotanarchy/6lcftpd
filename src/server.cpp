@@ -3,8 +3,9 @@
 
 using namespace std;
 
-server::server()
+server::server(config* cfg)
 {
+	this->cfg = cfg;
 	cout << "Server: STUB!" << endl;
 	
 }

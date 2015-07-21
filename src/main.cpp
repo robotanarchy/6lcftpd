@@ -14,7 +14,8 @@ int main()
 	{
 		config cfg {{"issue", "share", "chown", "chmod", "ipadr",
 			"write"}};
-		server srv;
+		
+		server srv(&cfg);
 	}
 	catch(exception &ex)
 	{

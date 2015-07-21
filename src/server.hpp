@@ -1,9 +1,10 @@
 #pragma once
-
+#include "config.hpp"
 
 class server
 {
 	public:
-		server();
-	
+		server(config* cfg);
+	private:
+		config* cfg;
 };
