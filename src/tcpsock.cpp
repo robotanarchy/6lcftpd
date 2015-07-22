@@ -40,6 +40,7 @@ string tcpsock::recv_line(uint16_t maxlen)
 	{
 		int ret = SDLNet_TCP_Recv(m_sock_sdl, &buffer, 1);
 		if(ret <=0) throw runtime_error("Connection closed!");
+		if(buffer == '\r') continue;
 		if(buffer == '\n') break;
 		line += buffer;
 	}
