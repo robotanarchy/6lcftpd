@@ -14,15 +14,20 @@ using namespace std;
 class tcpsock
 {
 	public:
+		tcpsock(TCPsocket sock_sdl, SDLNet_SocketSet sockset_sdl);
+	
 		// wrapper for SDLNet_ResolveHost() and SDLNet_TCP_Open(),
 		// throws SDLNet_GetError() as exception
-		tcpsock(uint16_t port, SDLNet_SocketSet sock_set_sdl);
+		tcpsock(uint16_t port, SDLNet_SocketSet sockset_sdl);
 		
 		// wrapper for SDLNet_TCP_Close()
 		~tcpsock();
 		
 		// wrapper for SDLNet_SocketReady()
 		bool ready();
+		
+		// wrapper for SDLNet_TCP_Accept()
+		tcpsock accept();
 		
 		// wrapper for SDLNet_TCP_Recv()
 		string recv(uint16_t len);
@@ -37,7 +42,7 @@ class tcp
 		// Wrapper for SDLNet_AllocSocketSet()
 		tcp(uint16_t socks_max);
 		
-		tcpsock socket_open(uint16_t port);
+		tcpsock* socket_open(uint16_t port);
 		
 		// Wrapper for SDLNet_FreeSocketSet()
 		~tcp();

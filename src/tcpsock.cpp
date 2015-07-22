@@ -2,6 +2,12 @@
 #include <iostream>
 
 
+tcpsock::tcpsock(TCPsocket sock_sdl, SDLNet_SocketSet sockset_sdl)
+{
+	m_sock_sdl = sock_sdl;
+	SDLNet_TCP_AddSocket(sockset_sdl, m_sock_sdl);
+}
+
 tcpsock::tcpsock(uint16_t port, SDLNet_SocketSet sockset_sdl)
 {
 	// open the socket

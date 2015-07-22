@@ -15,7 +15,7 @@ tcp::~tcp()
 	SDLNet_FreeSocketSet(m_sockset_sdl);
 }
 
-tcpsock tcp::socket_open(uint16_t port)
+tcpsock* tcp::socket_open(uint16_t port)
 {
 	if(m_socks.size() >= m_socks_max)
 		throw runtime_error("Socket limit reached, won't create a new"
@@ -23,7 +23,7 @@ tcpsock tcp::socket_open(uint16_t port)
 	
 	tcpsock* sock = new tcpsock(port, m_sockset_sdl);
 	m_socks.push_back(sock);
-	return *sock;
+	return sock;
 }
 
 

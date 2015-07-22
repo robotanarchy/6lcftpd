@@ -11,4 +11,5 @@ class server
 	private:
 		config* m_cfg;
 		tcp* m_tcp;
+		tcpsock* m_ctrl_listen;
 };

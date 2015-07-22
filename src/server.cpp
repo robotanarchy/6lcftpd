@@ -18,7 +18,7 @@ server::server(config* cfg, tcp* tcp_arg)
 		
 		try
 		{
-			m_tcp->socket_open(port);
+			m_ctrl_listen = m_tcp->socket_open(port);
 			cout << "OK!" << endl;
 			break;
 		}
