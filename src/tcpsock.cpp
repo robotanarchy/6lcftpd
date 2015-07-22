@@ -2,13 +2,12 @@
 #include <iostream>
 
 
-tcpsock::tcpsock(TCPsocket sock_sdl, SDLNet_SocketSet sockset_sdl)
+tcpsock::tcpsock(TCPsocket sock_sdl)
 {
 	m_sock_sdl = sock_sdl;
-	SDLNet_TCP_AddSocket(sockset_sdl, m_sock_sdl);
 }
 
-tcpsock::tcpsock(uint16_t port, SDLNet_SocketSet sockset_sdl)
+tcpsock::tcpsock(uint16_t port)
 {
 	// open the socket
 	// NOTE: SDL_Net can only host on all interfaces at once!
@@ -18,7 +17,6 @@ tcpsock::tcpsock(uint16_t port, SDLNet_SocketSet sockset_sdl)
 	m_sock_sdl = SDLNet_TCP_Open(&ip);
 	if(!m_sock_sdl)
 		throw runtime_error(string("SDL: ") + SDLNet_GetError());
-	SDLNet_TCP_AddSocket(sockset_sdl, m_sock_sdl);
 }
 
 tcpsock::~tcpsock()
@@ -34,8 +32,15 @@ bool tcpsock::ready()
 	return SDLNet_SocketReady(m_sock_sdl);
 }
 
-string recv(uint16_t len)
+string tcpsock::recv(uint16_t len)
 {
-	cout << "stub: tcpsock.recv();" << endl;
-	return "";
+	char buffer[len+1];
+	int ret = SDLNet_TCP_Recv(m_sock_sdl, &buffer, len);
+	if(ret <=0) throw runtime_error("Connection closed!");
+	return string(buffer);
+}
+
+TCPsocket tcpsock::get_sdl()
+{
+	return m_sock_sdl;
 }

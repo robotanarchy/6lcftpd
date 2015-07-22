@@ -18,6 +18,7 @@ int main()
 		tcp net {static_cast<uint16_t>(stoul(cfg.get_opt("socks")))};
 		
 		server srv(&cfg, &net);
+		srv.mainloop();
 	}
 	catch(exception &e)
 	{
