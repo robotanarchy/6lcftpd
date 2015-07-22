@@ -29,7 +29,10 @@ class tcpsock
 		
 		// wrapper for SDLNet_TCP_Recv()
 		// throws an exception when the connection has been closed
-		string recv(uint16_t len);
+		string recv_line(uint16_t maxlen = 100);
+		
+		// wrapper for SDLNet_TCP_Send()
+		void send_line(string line);
 		
 		TCPsocket get_sdl();
 		

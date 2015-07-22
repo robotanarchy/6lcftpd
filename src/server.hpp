@@ -18,4 +18,5 @@ class server
 		vector<tcpsock*> m_ctrl_connected;
 		
 		void accept();
+		string control_protocol(string msg);
 };

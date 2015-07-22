@@ -43,9 +43,9 @@ void server::accept()
 	tcpsock* sock = m_tcp->accept(m_ctrl_listen);
 	if(!sock) return;
 	
-	cout << "control socket connected! (count: "
-		<< m_ctrl_connected.size() << ")" << endl;
+	cout << "(" << sock << ") connected!" << endl;
 	
+	sock->send_line("220 "+m_cfg->get_opt("issue"));
 	m_ctrl_connected.push_back(sock);
 }
 
@@ -62,8 +62,11 @@ void server::mainloop()
 		{
 			try
 			{
-				string in = sock->recv(5);
+				string in = sock->recv_line();
 				cout << "(" << sock << ") received: " << in << endl;
+				string out = control_protocol(in);
+				cout << "(" << sock << ") answered: " << out << endl;
+				sock->send_line(out);
 			}
 			catch(exception e)
 			{

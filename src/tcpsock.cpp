@@ -32,12 +32,24 @@ bool tcpsock::ready()
 	return SDLNet_SocketReady(m_sock_sdl);
 }
 
-string tcpsock::recv(uint16_t len)
+string tcpsock::recv_line(uint16_t maxlen)
 {
-	char buffer[len+1];
-	int ret = SDLNet_TCP_Recv(m_sock_sdl, &buffer, len);
-	if(ret <=0) throw runtime_error("Connection closed!");
-	return string(buffer);
+	string line = "";
+	char buffer;
+	for(uint16_t i=0;i<maxlen;i++)
+	{
+		int ret = SDLNet_TCP_Recv(m_sock_sdl, &buffer, 1);
+		if(ret <=0) throw runtime_error("Connection closed!");
+		if(buffer == '\n') break;
+		line += buffer;
+	}
+	return line;
+}
+
+void tcpsock::send_line(string line)
+{
+	line = line + "\r\n";
+	SDLNet_TCP_Send(m_sock_sdl, line.data(), line.size());
 }
 
 TCPsocket tcpsock::get_sdl()
