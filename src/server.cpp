@@ -43,11 +43,19 @@ void server::accept()
 	tcpsock* sock = m_tcp->accept(m_ctrl_listen);
 	if(!sock) return;
 	
-	cout << "(" << sock << ") connected!" << endl;
 	
-	sock->send_line("220 "+m_cfg->get_opt("issue"));
-	m_ctrl_connected.push_back(sock);
+	m_ctrl_connected.push_back(new server_control(sock, m_cfg));
+	
+	cout << "(" << sock << ") connected!" << endl;
 }
+
+
+/*
+	TODO:
+		- I don't like how it currently accesses the sockets
+		- Put that code in server_control.*
+		- maybe create a tcpsocket_ctrl class that inherits tcpsocket?
+*/
 
 void server::mainloop()
 {
@@ -58,23 +66,25 @@ void server::mainloop()
 		
 		if(!m_tcp->check(100)) continue;
 		
-		for(auto sock : m_ctrl_connected)
+		for(auto ctrl : m_ctrl_connected)
 		{
+			tcpsock* sock = ctrl->get_sock();
 			try
 			{
 				string in = sock->recv_line();
-				cout << "(" << sock << ") received: " << in << endl;
-				string out = control_protocol(in);
-				cout << "(" << sock << ") answered: " << out << endl;
+				cout << "(" << ctrl << ") received: " << in << endl;
+				string out = ctrl->answer(in);
+				cout << "(" << ctrl << ") answered: " << out << endl;
 				sock->send_line(out);
 			}
 			catch(exception e)
 			{
-				cout << "(" << sock << ") disconnected" << endl;
+				cout << "(" << ctrl << ") disconnected" << endl;
 				m_tcp->del(sock);
 				m_ctrl_connected.erase(remove(m_ctrl_connected.begin(),
-					m_ctrl_connected.end(), sock),
+					m_ctrl_connected.end(), ctrl),
 					m_ctrl_connected.end());
+				delete ctrl;
 			}
 		}
 	}

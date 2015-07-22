@@ -1,6 +1,6 @@
 #pragma once
 #include "config.hpp"
-#include "tcp.hpp"
+#include "server_control.hpp"
 #include <vector>
 
 
@@ -15,8 +15,7 @@ class server
 		tcp* m_tcp;
 		tcpsock* m_ctrl_listen;
 		
-		vector<tcpsock*> m_ctrl_connected;
+		vector<server_control*> m_ctrl_connected;
 		
 		void accept();
-		string control_protocol(string msg);
 };
