@@ -1,5 +1,5 @@
-#include "server.hpp"
-#include "config.hpp"
+#include "server/server.hpp"
+#include "config/config.hpp"
 #include <iostream>
 
 
@@ -12,11 +12,8 @@ int main()
 	
 	try
 	{
-		config cfg {};
-		
-		tcp net {static_cast<uint16_t>(stoul(cfg.get_opt("socks")))};
-		
-		server srv(&cfg, &net);
+		config cfg{};
+		server srv{cfg};
 		srv.mainloop();
 	}
 	catch(exception &e)
