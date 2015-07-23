@@ -19,14 +19,21 @@ string session::answer(string msg)
 
 void session::thread_method()
 {
-	m_ctrl.send(m_cfg.get_opt("issue"));
-	
-	while(1)
+	try
 	{
-		// talk back to incoming text
-		m_ctrl.send(answer(m_ctrl.recv()));
-		
-		// TODO: manage data transfers here etc.
+		cout << "# session " << this << " started #" << endl;
+		m_ctrl.send(m_cfg.get_opt("issue"));
+		while(1)
+		{
+			// talk back to incoming text
+			m_ctrl.send(answer(m_ctrl.recv()));
+			
+			// TODO: manage data transfers here etc.
+		}
+	}
+	catch(exception e)
+	{
+		cout << "# session " << this << " closed #" << endl;
 	}
 }
 
@@ -34,7 +41,7 @@ void session::thread_method()
 session::session(socket_ctrl& ctrl, config& cfg)
 	: m_ctrl{ctrl}
 	, m_cfg{cfg}
-	, m_thread(thread_method);
+	, m_thread(&session::thread_method, this)
 {
 }
 
