@@ -1,6 +1,7 @@
 #pragma once
 #include "../socket/socket.hpp"
 #include "../config/config.hpp"
+#include <thread>
 
 
 using namespace std;
@@ -12,6 +13,11 @@ class session
 		~session();
 		
 	private:
+		void thread_method(); // FIXME: doesn't work like this
+		string answer(string msg);
+		
 		socket_ctrl& m_ctrl;
 		config& m_cfg;
+		thread m_thread;
+		string m_pwd;
 };
