@@ -12,6 +12,10 @@ string session::answer(string msg)
 	
 	if(cmd == "TYPE") return "200 WHATEVER";
 	
+	if(cmd == "PASV") return "227";
+	
+	// if(cmd == "LIST") return "150 WHY DON'T YOU WAIT FOR A DATA CONNECTION";
+	
 	return "502 WAIT... WHAT?";
 }
 
