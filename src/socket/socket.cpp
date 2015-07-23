@@ -14,6 +14,13 @@ socket::socket(TCPsocket socket_sdl)
 }
 
 
+socket::~socket()
+{
+	SDLNet_TCP_DelSocket(m_socket_set_sdl, m_socket_sdl);
+	SDLNet_TCP_Close(m_socket_sdl);
+	SDLNet_FreeSocketSet(m_socket_set_sdl);
+}
+
 /*
 	One would try to simply wrap "SDLNet_SocketReady()" here, but this
 	doesn't work: "This function should only be used on a socket in a

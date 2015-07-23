@@ -27,9 +27,10 @@ class socket
 	public:
 		socket();
 		socket(TCPsocket socket_sdl);
-		
+		~socket();
 		// timeout 0: instantly return when there's no activity
 		bool ready(uint32_t timeout_ms=0);
+		
 	protected:
 		TCPsocket m_socket_sdl;
 		SDLNet_SocketSet m_socket_set_sdl;

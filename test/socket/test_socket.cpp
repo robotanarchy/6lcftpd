@@ -36,5 +36,8 @@ int main()
 	ctrl->recv();
 	
 	cout << "that's it, shutting down." << endl;
+	
+	delete ctrl;
+	
 	return 0;
 }
