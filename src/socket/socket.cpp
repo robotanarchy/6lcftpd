@@ -36,16 +36,18 @@ socket_ctrl* socket_listen::accept()
 	return socket_sdl ? new socket_ctrl(socket_sdl) : nullptr;
 }
 
+/*
 socket_data* socket_listen::accept()
 {
 	TCPsocket socket_sdl = SDLNet_TCP_Accept(m_socket_sdl);
 	return socket_sdl ? new socket_data(socket_sdl) : nullptr;
 }
+*/
 
 // </FIXME>
 
 string socket_ctrl::recv(uint16_t maxlen)
-{
+{	
 	string line = "";
 	char buffer;
 	for(uint16_t i=0;i<maxlen;i++)
@@ -56,11 +58,14 @@ string socket_ctrl::recv(uint16_t maxlen)
 		if(buffer == '\n') break;
 		line += buffer;
 	}
+	cout << "[" << this << "] recv: " << line << endl;
 	return line;
 }
 
 void socket_ctrl::send(string line)
 {
+	cout << "[" << this << "] send: " << line << endl;
+	
 	line += "\r\n";
 	SDLNet_TCP_Send(m_socket_sdl, line.data(), line.size());
 }
