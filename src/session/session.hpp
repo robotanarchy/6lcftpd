@@ -19,5 +19,5 @@ class session
 		socket_ctrl& m_ctrl;
 		config& m_cfg;
 		thread m_thread;
-		string m_pwd;
+		string m_pwd = "/";
 };

@@ -22,7 +22,7 @@ void session::thread_method()
 	try
 	{
 		cout << "# session " << this << " started #" << endl;
-		m_ctrl.send(m_cfg.get_opt("issue"));
+		m_ctrl.send("220 " + m_cfg.get_opt("issue"));
 		while(1)
 		{
 			// talk back to incoming text
