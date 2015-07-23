@@ -9,9 +9,10 @@ valgrind: bin/6lcftpd
 run: bin/6lcftpd
 	bin/6lcftpd
 
-bin/6lcftpd: src/*.cpp src/*.hpp
+bin/6lcftpd: src/*.*pp src/*/*.*pp
 	mkdir -p bin
-	$(CXX) `$(PKGCONFIG) --cflags --libs $(LIBS)` -o $@ src/*.cpp
+	$(CXX) `$(PKGCONFIG) --cflags --libs $(LIBS)` -o $@ src/*.cpp \
+		src/*/*.cpp
 
 clean:
 	rm bin/6lcftpd || true
