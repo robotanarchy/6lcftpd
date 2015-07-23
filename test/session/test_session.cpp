@@ -15,7 +15,20 @@ void sleep()
 
 int main()
 {
-	cout << "hello world!" << endl;
+	config cfg{};
+	cout << "waiting for a connection on port 2111..." << endl;
 	
-	return 0;
+	
+	socket_ctrl* ctrl;
+	socket_listen listen {2111};
+	while(1)
+	{
+		ctrl = listen.accept_ctrl();
+		if(ctrl) break;
+		sleep();
+	}
+	
+	session test_session{*ctrl, cfg};
+	
+	cout << "done." << endl;
 }
