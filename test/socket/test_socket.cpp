@@ -22,7 +22,7 @@ int main()
 	socket_listen listen {2111};
 	while(1)
 	{
-		ctrl = listen.accept();
+		ctrl = listen.accept_ctrl();
 		if(ctrl) break;
 		sleep();
 	}
@@ -31,8 +31,7 @@ int main()
 	
 	cout << "waiting for an answer..." << endl;
 	
-	while(!ctrl->ready())
-		sleep();
+	while(!ctrl->ready(100));
 	
 	ctrl->recv();
 	
