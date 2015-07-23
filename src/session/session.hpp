@@ -13,7 +13,7 @@ class session
 		~session();
 		
 	private:
-		void thread_method(); // FIXME: doesn't work like this
+		void thread_method();
 		string answer(string msg);
 		
 		socket_ctrl& m_ctrl;

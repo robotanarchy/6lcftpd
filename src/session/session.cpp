@@ -28,7 +28,6 @@ void session::thread_method()
 			// talk back to incoming text
 			m_ctrl.send(answer(m_ctrl.recv()));
 			
-			// TODO: manage data transfers here etc.
 		}
 	}
 	catch(exception e)
@@ -41,7 +40,7 @@ void session::thread_method()
 session::session(socket_ctrl& ctrl, config& cfg)
 	: m_ctrl{ctrl}
 	, m_cfg{cfg}
-	, m_thread(&session::thread_method, this)
+	, m_thread{&session::thread_method, this}
 {
 }
 
