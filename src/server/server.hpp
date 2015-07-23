@@ -17,4 +17,5 @@ class server
 	private:
 		config& m_cfg;
 		socket_listen* m_listen;
+		vector<session*> m_sessions;
 };
