@@ -36,11 +36,11 @@ void session::thread_method()
 	try
 	{
 		cout << "# session " << this << " started #" << endl;
-		m_ctrl.send("220 " + m_cfg.get_opt("issue"));
+		m_ctrl->send("220 " + m_cfg.get_opt("issue"));
 		while(1)
 		{
 			// talk back to incoming text
-			m_ctrl.send(answer(m_ctrl.recv()));
+			m_ctrl->send(answer(m_ctrl->recv()));
 			
 		}
 	}
@@ -51,7 +51,7 @@ void session::thread_method()
 }
 
 
-session::session(socket_ctrl& ctrl, config& cfg)
+session::session(socket_ctrl* ctrl, config& cfg)
 	: m_ctrl{ctrl}
 	, m_cfg{cfg}
 	, m_thread{&session::thread_method, this}

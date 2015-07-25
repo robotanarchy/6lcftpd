@@ -39,10 +39,7 @@ void server::mainloop()
 	cout << "waiting for connections." << endl;
 	
 	while(1)
-	{
-		// TODO: accept connections, spawn sessions, sleep, repeat
-		// also fill a vector of sessions.
-		
+	{	
 		socket_ctrl* ctrl = m_listen->accept_ctrl();
 		if(!ctrl)
 		{
@@ -50,7 +47,7 @@ void server::mainloop()
 			continue;
 		}
 		
-		session* s = new session(*ctrl, m_cfg);
+		session* s = new session(ctrl, m_cfg);
 		m_sessions.push_back(s);
 	}
 }
